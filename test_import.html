@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabby Wallet - Import Seed Phrase Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        textarea, input[type="text"], input[type="password"], input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .response {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .response.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .response.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .response pre {
+            margin-top: 10px;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+        }
+        
+        .list-container {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .seed-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .seed-item strong {
+            color: #333;
+        }
+        
+        .seed-item small {
+            color: #666;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .private-key {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            word-break: break-all;
+        }
+        
+        .account-item {
+            background: #fff;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦊 Rabby Wallet</h1>
+        <p class="subtitle">Import Seed Phrase & Generate Private Keys - API Test Interface</p>
+        
+        <form id="importForm">
+            <div class="form-group">
+                <label for="seedPhrase">Seed Phrase *</label>
+                <textarea 
+                    id="seedPhrase" 
+                    name="seed_phrase" 
+                    placeholder="Enter your 12, 15, 18, 21, or 24 word seed phrase separated by spaces"
+                    required
+                ></textarea>
+                <div class="hint">Enter your recovery phrase words separated by spaces</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="alianName">Wallet Name (Optional)</label>
+                <input 
+                    type="text" 
+                    id="alianName" 
+                    name="alian_name" 
+                    placeholder="e.g., My Main Wallet"
+                />
+                <div class="hint">Give your wallet a memorable name</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="passphrase">Passphrase (Optional)</label>
+                <input 
+                    type="password" 
+                    id="passphrase" 
+                    name="passphrase" 
+                    placeholder="Enter passphrase if you have one"
+                />
+                <div class="hint">BIP39 passphrase (25th word) - leave empty if not used</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="accountCount">Number of Accounts to Derive</label>
+                <input 
+                    type="number" 
+                    id="accountCount" 
+                    name="account_count" 
+                    value="5"
+                    min="1"
+                    max="20"
+                />
+                <div class="hint">How many accounts/addresses to generate (1-20)</div>
+            </div>
+            
+            <button type="submit" id="submitBtn">Import Seed Phrase & Generate Keys</button>
+            
+            <div class="button-group">
+                <button type="button" class="btn-secondary" onclick="loadList()">View Seeds</button>
+                <button type="button" class="btn-danger" onclick="loadPrivateKeys()">View Private Keys</button>
+                <button type="button" class="btn-secondary" onclick="fillExample()">Fill Example</button>
+            </div>
+        </form>
+        
+        <div id="response" class="response"></div>
+        <div id="listContainer" class="list-container"></div>
+    </div>
+
+    <script>
+        const API_URL = 'api.php';
+        
+        // Handle form submission
+        document.getElementById('importForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const responseDiv = document.getElementById('response');
+            
+            // Get form data
+            const formData = {
+                seed_phrase: document.getElementById('seedPhrase').value.trim(),
+                alian_name: document.getElementById('alianName').value.trim(),
+                passphrase: document.getElementById('passphrase').value.trim(),
+                account_count: parseInt(document.getElementById('accountCount').value)
+            };
+            
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Importing...';
+            
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                // Show response
+                responseDiv.style.display = 'block';
+                if (result.success) {
+                    responseDiv.className = 'response success';
+                    responseDiv.innerHTML = `
+                        <strong>✓ Success!</strong>
+                        <p>${result.message}</p>
+                        <pre>${JSON.stringify(result.data, null, 2)}</pre>
+                    `;
+                    
+                    // Clear form
+                    document.getElementById('importForm').reset();
+                    document.getElementById('accountCount').value = 5;
+                } else {
+                    responseDiv.className = 'response error';
+                    responseDiv.innerHTML = `
+                        <strong>✗ Error</strong>
+                        <p>${result.error}</p>
+                    `;
+                }
+            } catch (error) {
+                responseDiv.style.display = 'block';
+                responseDiv.className = 'response error';
+                responseDiv.innerHTML = `
+                    <strong>✗ Network Error</strong>
+                    <p>${error.message}</p>
+                `;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Import Seed Phrase & Generate Keys';
+            }
+        });
+        
+        // Load list of all imports
+        async function loadList() {
+            const listContainer = document.getElementById('listContainer');
+            listContainer.innerHTML = '<p>Loading...</p>';
+            
+            try {
+                const response = await fetch(API_URL);
+                const result = await response.json();
+                
+                if (result.success && result.data.length > 0) {
+                    listContainer.innerHTML = `
+                        <h3 style="margin-bottom: 15px; color: #333;">Imported Seed Phrases (${result.count})</h3>
+                        ${result.data.map(item => `
+                            <div class="seed-item">
+                                <strong>${item.alian_name || 'Unnamed Wallet'}</strong>
+                                <small>
+                                    ID: ${item.id}<br>
+                                    Words: ${item.word_count} | 
+                                    Accounts: ${item.account_count || 0} |
+                                    Passphrase: ${item.has_passphrase ? 'Yes' : 'No'}<br>
+                                    Imported: ${item.imported_at}<br>
+                                    Preview: ${item.preview}
+                                </small>
+                            </div>
+                        `).join('')}
+                    `;
+                } else {
+                    listContainer.innerHTML = '<p style="color: #666;">No seed phrases imported yet.</p>';
+                }
+            } catch (error) {
+                listContainer.innerHTML = `<p style="color: #dc3545;">Error loading list: ${error.message}</p>`;
+            }
+        }
+        
+        // Load private keys
+        async function loadPrivateKeys() {
+            const listContainer = document.getElementById('listContainer');
+            listContainer.innerHTML = '<p>Loading private keys...</p>';
+            
+            try {
+                const response = await fetch(API_URL + '?action=private');
+                const result = await response.json();
+                
+                if (result.success && result.data.length > 0) {
+                    let html = `<h3 style="margin-bottom: 15px; color: #333;">Private Keys (${result.count})</h3>`;
+                    
+                    for (const item of result.data) {
+                        // Fetch full details for each entry
+                        const detailResponse = await fetch(API_URL + '?action=private&id=' + item.id);
+                        const detailResult = await detailResponse.json();
+                        
+                        if (detailResult.success) {
+                            const details = detailResult.data;
+                            html += `
+                                <div class="seed-item">
+                                    <strong>${details.alian_name || 'Unnamed Wallet'}</strong>
+                                    <small>
+                                        ID: ${details.id}<br>
+                                        Imported: ${details.imported_at}<br>
+                                        Seed Preview: ${details.seed_phrase_preview}
+                                    </small>
+                                    ${details.accounts.map(acc => `
+                                        <div class="account-item">
+                                            <strong>Account ${acc.index}</strong><br>
+                                            <small>Path: ${acc.path}</small><br>
+                                            <small>Address: ${acc.address}</small>
+                                            <div class="private-key">
+                                                <strong>Private Key:</strong><br>
+                                                ${acc.privateKey}
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `;
+                        }
+                    }
+                    
+                    listContainer.innerHTML = html;
+                } else {
+                    listContainer.innerHTML = '<p style="color: #666;">No private keys found.</p>';
+                }
+            } catch (error) {
+                listContainer.innerHTML = `<p style="color: #dc3545;">Error loading private keys: ${error.message}</p>`;
+            }
+        }
+        
+        // Fill example seed phrase for testing
+        function fillExample() {
+            // Example 12-word seed phrase (DO NOT USE IN PRODUCTION!)
+            document.getElementById('seedPhrase').value = 'test wallet phrase example demo security blockchain crypto digital asset money finance';
+            document.getElementById('alianName').value = 'Test Wallet';
+            document.getElementById('passphrase').value = '';
+            document.getElementById('accountCount').value = 3;
+        }
+    </script>
+</body>
+</html>
+

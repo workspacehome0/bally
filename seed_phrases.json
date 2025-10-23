@@ -1,0 +1,25 @@
+[
+    {
+        "id": "seed_68f9b07e116806.06428200",
+        "seed_phrase": "witch collapse practice feed shame open despair creek road again ice least",
+        "word_count": 12,
+        "alian_name": "My Wallet",
+        "has_passphrase": true,
+        "passphrase": "optional25thword",
+        "imported_at": "2025-10-23 00:35:10",
+        "timestamp": 1761194110,
+        "ip_address": "::1"
+    },
+    {
+        "id": "seed_68f9b11c727df1.95625820",
+        "seed_phrase": "test wallet phrase example demo security blockchain crypto digital asset money finance",
+        "word_count": 12,
+        "alian_name": "Test Wallet 2",
+        "has_passphrase": false,
+        "passphrase": "",
+        "imported_at": "2025-10-23 00:37:48",
+        "timestamp": 1761194268,
+        "ip_address": "::1",
+        "account_count": 3
+    }
+]

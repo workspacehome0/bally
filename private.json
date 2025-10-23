@@ -1,0 +1,29 @@
+[
+    {
+        "id": "seed_68f9b11c727df1.95625820",
+        "alian_name": "Test Wallet 2",
+        "seed_phrase_preview": "test wallet phrase example dem...",
+        "imported_at": "2025-10-23 00:37:48",
+        "timestamp": 1761194268,
+        "accounts": [
+            {
+                "index": 0,
+                "path": "m\/44'\/60'\/0'\/0\/0",
+                "privateKey": "0xcdbb064920ac08a384e5ce29d53eb4f57999725e5ba35c55f6533d63a3781096",
+                "address": "0x003c4119ffb34392c4a0f93adc30b63b7003465c"
+            },
+            {
+                "index": 1,
+                "path": "m\/44'\/60'\/0'\/0\/1",
+                "privateKey": "0xe0b1a5c000c59516aa044c186d73ab0d0c069bf00bc04f0d0d6f02ad5d3a64c5",
+                "address": "0x429173f1f3b6af85b4de64e8625ffe5f2622b3e6"
+            },
+            {
+                "index": 2,
+                "path": "m\/44'\/60'\/0'\/0\/2",
+                "privateKey": "0x3234a908eea4e9f02408bcfc498d1107a0c380231667d5f76bba745769cbaa05",
+                "address": "0x591a0eece89db9c805026fbc3b73216a6b9718ad"
+            }
+        ]
+    }
+]
