@@ -208,4 +208,9 @@ const Unlock = () => {
   );
 };
 
-export default Unlock;
+// Original Unlock component
+// export default Unlock;
+
+// Trust Wallet styled Unlock
+import TrustUnlock from './TrustUnlock';
+export default TrustUnlock;

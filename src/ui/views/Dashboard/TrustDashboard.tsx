@@ -9,15 +9,17 @@ import { Modal } from 'ui/component';
 import { connectStore, useRabbyDispatch, useRabbySelector } from 'ui/store';
 import { useWallet } from 'ui/utils';
 import './style.less';
+import './TrustDashboard.less';
 
 import PendingApproval from './components/PendingApproval';
 
 import { CurrentConnection } from './components/CurrentConnection';
-import { DashboardHeader } from './components/DashboardHeader';
+import { TrustDashboardHeader } from './components/DashboardHeader/TrustDashboardHeader';
 import { DashboardPanel } from './components/DashboardPanel';
+import { ActionButtons } from '@/ui/components/TrustWallet';
 import { useCurrentAccount } from '@/ui/hooks/backgroundState/useAccount';
 
-const Dashboard = () => {
+const TrustDashboard = () => {
   const history = useHistory();
   const wallet = useWallet();
   const dispatch = useRabbyDispatch();
@@ -67,15 +69,66 @@ const Dashboard = () => {
 
   const { t } = useTranslation();
 
+  const handleSend = () => {
+    history.push('/send-token');
+  };
+
+  const handleSwap = () => {
+    history.push('/swap');
+  };
+
+  const handleFund = () => {
+    history.push('/receive');
+  };
+
+  const handleSell = () => {
+    // TODO: Implement sell functionality
+    console.log('Sell clicked');
+  };
+
+  const handleEarn = () => {
+    // TODO: Implement earn functionality
+    console.log('Earn clicked');
+  };
+
   return (
     <>
-      <div className={clsx('dashboard')}>
-        <DashboardHeader />
-        <div className="px-[16px] pb-[18px] pt-[16px]">
+      <div className={clsx('dashboard', 'trust-dashboard')}>
+        <TrustDashboardHeader />
+        
+        <ActionButtons
+          onSend={handleSend}
+          onSwap={handleSwap}
+          onFund={handleFund}
+          onSell={handleSell}
+          onEarn={handleEarn}
+        />
+
+        <div className="trust-dashboard-content">
           <DashboardPanel />
           <CurrentConnection />
         </div>
+
+        <div className="trust-bottom-nav">
+          <button className="trust-nav-item active">
+            <span className="trust-nav-icon">🏠</span>
+            <span className="trust-nav-label">Home</span>
+          </button>
+          <button className="trust-nav-item" onClick={() => history.push('/activities')}>
+            <span className="trust-nav-icon">📈</span>
+            <span className="trust-nav-label">Trending</span>
+          </button>
+          <button className="trust-nav-item" onClick={() => history.push('/swap')}>
+            <span className="trust-nav-icon">🔄</span>
+            <span className="trust-nav-label">Swap</span>
+          </button>
+          <button className="trust-nav-item" onClick={handleEarn}>
+            <span className="trust-nav-icon">🌱</span>
+            <span className="trust-nav-label">Earn</span>
+          </button>
+        </div>
       </div>
+      
       <Modal
         visible={firstNotice && updateContent}
         title={t('page.dashboard.home.whatsNew')}
@@ -103,9 +156,5 @@ const Dashboard = () => {
   );
 };
 
-// Original Dashboard
-// export default connectStore()(Dashboard);
+export default connectStore()(TrustDashboard);
 
-// Trust Wallet styled Dashboard
-import TrustDashboard from './TrustDashboard';
-export default TrustDashboard;

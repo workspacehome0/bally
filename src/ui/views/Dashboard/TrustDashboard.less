@@ -1,0 +1,239 @@
+.trust-dashboard {
+  background: #FFFFFF;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 70px; // Space for bottom nav
+}
+
+.trust-dashboard-content {
+  flex: 1;
+  padding: 0 16px 16px 16px;
+  overflow-y: auto;
+}
+
+.trust-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: #FFFFFF;
+  border-top: 1px solid #F3F4F6;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 16px;
+  z-index: 100;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.trust-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+
+  &:hover {
+    background: #F3F4F6;
+  }
+
+  &.active {
+    .trust-nav-icon {
+      color: #3B82F6;
+    }
+
+    .trust-nav-label {
+      color: #3B82F6;
+      font-weight: 600;
+    }
+  }
+}
+
+.trust-nav-icon {
+  font-size: 24px;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.trust-nav-label {
+  font-size: 12px;
+  color: #6B7280;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+// Override default dashboard styles for Trust Wallet theme
+.trust-dashboard {
+  .dashboard-header {
+    display: none; // Hide original header
+  }
+
+  // Update token list styling
+  .token-list-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #F3F4F6;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #F9FAFB;
+    }
+  }
+
+  // Update card styling
+  .card {
+    border-radius: 12px;
+    border: 1px solid #F3F4F6;
+    box-shadow: none;
+  }
+
+  // Update button styling
+  .ant-btn-primary {
+    background: #3B82F6;
+    border-color: #3B82F6;
+    border-radius: 12px;
+
+    &:hover {
+      background: #2563EB;
+      border-color: #2563EB;
+    }
+  }
+}
+
+// Alpha Tokens section styling
+.trust-alpha-tokens {
+  margin: 16px 0;
+  padding: 16px;
+  background: #F9FAFB;
+  border-radius: 12px;
+}
+
+.trust-alpha-tokens-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 12px;
+}
+
+.trust-alpha-tokens-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #F3F4F6;
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 2px;
+
+    &:hover {
+      background: #9CA3AF;
+    }
+  }
+}
+
+.trust-alpha-token-card {
+  min-width: 140px;
+  padding: 12px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #3B82F6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+  }
+}
+
+.trust-alpha-token-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.trust-alpha-token-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 4px;
+}
+
+.trust-alpha-token-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 2px;
+}
+
+.trust-alpha-token-change {
+  font-size: 12px;
+  font-weight: 500;
+
+  &.positive {
+    color: #10B981;
+  }
+
+  &.negative {
+    color: #EF4444;
+  }
+}
+
+// Tabs styling
+.trust-tabs {
+  display: flex;
+  gap: 24px;
+  padding: 16px;
+  border-bottom: 2px solid #F3F4F6;
+  margin-bottom: 16px;
+}
+
+.trust-tab {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6B7280;
+  padding: 8px 0;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+
+  &.active {
+    color: #3B82F6;
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #3B82F6;
+    }
+  }
+
+  &:hover {
+    color: #3B82F6;
+  }
+}
+
