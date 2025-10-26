@@ -35,4 +35,3 @@ export const TrustShieldLogo: React.FC<TrustShieldLogoProps> = ({
     </svg>
   );
 };
-
