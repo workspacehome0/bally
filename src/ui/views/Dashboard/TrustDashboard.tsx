@@ -95,7 +95,7 @@ const TrustDashboard = () => {
     <>
       <div className={clsx('dashboard', 'trust-dashboard')}>
         <TrustDashboardHeader />
-        
+
         <ActionButtons
           onSend={handleSend}
           onSwap={handleSwap}
@@ -114,11 +114,17 @@ const TrustDashboard = () => {
             <span className="trust-nav-icon">🏠</span>
             <span className="trust-nav-label">Home</span>
           </button>
-          <button className="trust-nav-item" onClick={() => history.push('/activities')}>
+          <button
+            className="trust-nav-item"
+            onClick={() => history.push('/activities')}
+          >
             <span className="trust-nav-icon">📈</span>
             <span className="trust-nav-label">Trending</span>
           </button>
-          <button className="trust-nav-item" onClick={() => history.push('/swap')}>
+          <button
+            className="trust-nav-item"
+            onClick={() => history.push('/swap')}
+          >
             <span className="trust-nav-icon">🔄</span>
             <span className="trust-nav-label">Swap</span>
           </button>
@@ -128,7 +134,7 @@ const TrustDashboard = () => {
           </button>
         </div>
       </div>
-      
+
       <Modal
         visible={firstNotice && updateContent}
         title={t('page.dashboard.home.whatsNew')}
@@ -157,4 +163,3 @@ const TrustDashboard = () => {
 };
 
 export default connectStore()(TrustDashboard);
-

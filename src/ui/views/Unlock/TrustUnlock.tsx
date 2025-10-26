@@ -24,7 +24,7 @@ const InputFormStyled = styled(Form.Item)`
     margin-top: 12px;
     margin-bottom: 0;
     min-height: 0px;
-    color: #EF4444;
+    color: #ef4444;
     font-weight: 500;
   }
 `;
@@ -95,14 +95,14 @@ const TrustUnlock = () => {
       <div className="trust-unlock-container">
         <div className="trust-unlock-content">
           <TrustShieldLogo size={100} />
-          
+
           <h1 className="trust-unlock-title">
             Secure and trusted multi-chain crypto wallet
           </h1>
 
-          <Form 
-            autoComplete="off" 
-            form={form} 
+          <Form
+            autoComplete="off"
+            form={form}
             onFinish={handleSubmit}
             className="trust-unlock-form"
           >
@@ -151,7 +151,8 @@ const TrustUnlock = () => {
 
           <div className="trust-unlock-footer">
             <p className="trust-unlock-footer-text">
-              Can't login? You can erase your current wallet and set up a new one
+              Can't login? You can erase your current wallet and set up a new
+              one
             </p>
             {hasForgotPassword && (
               <button
@@ -169,4 +170,3 @@ const TrustUnlock = () => {
 };
 
 export default TrustUnlock;
-

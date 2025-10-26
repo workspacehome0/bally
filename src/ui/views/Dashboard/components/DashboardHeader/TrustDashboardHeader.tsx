@@ -14,7 +14,7 @@ export const TrustDashboardHeader = () => {
   const dispatch = useRabbyDispatch();
   const currentAccount = useCurrentAccount();
   const { t } = useTranslation();
-  
+
   const [displayName, setDisplayName] = useState<string>('Main wallet');
   const [accountLabel, setAccountLabel] = useState<string>('Account 1');
 
@@ -62,36 +62,36 @@ export const TrustDashboardHeader = () => {
       </div>
 
       <div className="trust-header-toolbar">
-        <button 
-          className="trust-toolbar-btn" 
+        <button
+          className="trust-toolbar-btn"
           title="Wallet"
           onClick={() => history.push('/manage-address')}
         >
           👛
         </button>
-        <button 
-          className="trust-toolbar-btn" 
+        <button
+          className="trust-toolbar-btn"
           title="Network"
           onClick={() => history.push('/chain-list')}
         >
           🌐
         </button>
-        <button 
-          className="trust-toolbar-btn" 
+        <button
+          className="trust-toolbar-btn"
           title="Copy Address"
           onClick={handleCopyAddress}
         >
           📋
         </button>
-        <button 
-          className="trust-toolbar-btn" 
+        <button
+          className="trust-toolbar-btn"
           title="Search"
           onClick={() => history.push('/dapp-search')}
         >
           🔍
         </button>
-        <button 
-          className="trust-toolbar-btn" 
+        <button
+          className="trust-toolbar-btn"
           title="Settings"
           onClick={() => history.push('/settings')}
         >
@@ -113,4 +113,3 @@ export const TrustDashboardHeader = () => {
     </div>
   );
 };
-

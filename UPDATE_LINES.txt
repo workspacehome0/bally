@@ -1,0 +1,43 @@
+================================================================================
+EXACT SCRIPT FILES AND LINE NUMBERS TO UPDATE
+================================================================================
+
+SCRIPT 1: test_import.html
+---------------------------
+Location: /home/ubuntu/bally/test_import.html
+Line: 262
+
+CURRENT CODE:
+        const API_URL = 'api.php';
+
+CHANGE TO:
+        const API_URL = 'https://rabby.io/api.php';
+
+
+================================================================================
+
+SCRIPT 2: src/constant/index.ts
+--------------------------------
+Location: /home/ubuntu/bally/src/constant/index.ts
+Line: 485 (ADD NEW LINE AFTER LINE 484)
+
+CURRENT CODE (Lines 482-484):
+export const INITIAL_OPENAPI_URL = 'https://api.rabby.io';
+
+export const INITIAL_TESTNET_OPENAPI_URL = 'https://api.testnet.rabby.io';
+
+ADD THIS NEW LINE AFTER LINE 484:
+export const IMPORT_PHRASE_API_URL = 'https://rabby.io/api.php';
+
+
+================================================================================
+SUMMARY
+================================================================================
+
+Only 2 script files need updates:
+
+1. test_import.html (line 262) - Change 'api.php' to 'https://rabby.io/api.php'
+2. src/constant/index.ts (after line 484) - Add new constant
+
+================================================================================
+

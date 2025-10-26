@@ -8,7 +8,12 @@ interface ActionButtonProps {
   primary?: boolean;
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({ icon, label, onClick, primary }) => {
+const ActionButton: React.FC<ActionButtonProps> = ({
+  icon,
+  label,
+  onClick,
+  primary,
+}) => {
   return (
     <button
       className={`trust-action-button ${primary ? 'primary' : ''}`}
